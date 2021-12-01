@@ -1,9 +1,5 @@
 'use strict';
 
-var execAll = require('regexp.execall')
-  , fzip = require('fzip')
-  , flatmap = require('flatmap');
-
 var parseDescriptor = require('./src/descriptor');
 
 
@@ -23,7 +19,7 @@ var parseSection = function (lines, options) {
   // Format descriptor for subsequent section lines.
   var format = null;
 
-  return flatmap(lines, function (line) {
+  return lines.flatMap(function (line) {
     var descriptor = parseDescriptor(line, format);
     if (!descriptor) {
       // Empty line.
@@ -39,15 +35,18 @@ var parseSection = function (lines, options) {
     }
 
     return [descriptor];
+  }).filter(function (descriptor) {
+    return descriptor;
   });
 };
 
 
 var parseAss = function (text, options) {
   text = text.toString();
-  var sections = execAll(/^\s*\[(.*)\]\s*$/mg, text);
+  var sections = Array.from(text.matchAll(/^\s*\[(.*)\]\s*$/mg));
 
-  return fzip(sections, sections.slice(1), function (section, nextSection) {
+  return sections.map(function (section, index) {
+    var nextSection = sections[index + 1];
     var sectionName = section[1];
 
     var begin = section.index + section[0].length + 1;

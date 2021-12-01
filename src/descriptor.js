@@ -1,7 +1,5 @@
 'use strict';
 
-var zipmap = require('zipmap');
-
 
 /**
  * Parse individual SSA/ASS lines ("descriptors").
@@ -50,7 +48,10 @@ module.exports = function (line, format) {
     value = value.map(Function.call.bind(''.trim));
 
     if (format) {
-      value = zipmap(format, value);
+      value = format.reduce(function (map, key, index) {
+        map[key] = value[index];
+        return map;
+      }, {});
     }
   }
 
