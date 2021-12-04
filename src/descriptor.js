@@ -1,6 +1,3 @@
-'use strict';
-
-
 /**
  * Parse individual SSA/ASS lines ("descriptors").
  *
@@ -17,46 +14,43 @@
  * @arg {string[]} [format]
  * @return {Object?}
  */
-module.exports = function (line, format) {
+export default (line, format) => {
   if (/^\s*$/.test(line)) {
-    return null;
+    return null
   }
-  else if (line[0] == ';') {
+  if (line[0] === ';') {
     return {
       type: 'comment',
       value: line.slice(1)
-    };
+    }
   }
 
-  var parts = line.split(':');
+  const parts = line.split(':')
 
-  var key = parts[0];
-  var value = parts.slice(1)
-                   .join(':')
-                   .trim();
+  const key = parts[0]
+  let value = parts.slice(1)
+    .join(':')
+    .trim()
 
-  if (format || key == 'Format') {
-    value = value.split(',');
+  if (format || key === 'Format') {
+    value = value.split(',')
 
     // Last part may contain commas (e.g. actual subtitle strings).
     if (format && value.length > format.length) {
-      var lastPart = value.slice(format.length - 1).join(',');
-      value.length = format.length - 1;
-      value.push(lastPart);
+      const lastPart = value.slice(format.length - 1).join(',')
+      value.length = format.length - 1
+      value.push(lastPart)
     }
 
-    value = value.map(Function.call.bind(''.trim));
+    value = value.map(Function.call.bind(''.trim))
 
     if (format) {
-      value = format.reduce(function (map, key, index) {
-        map[key] = value[index];
-        return map;
-      }, {});
+      value = format.reduce((map, key, index) => {
+        map[key] = value[index]
+        return map
+      }, {})
     }
   }
 
-  return {
-    key: key,
-    value: value
-  };
-};
+  return { key, value }
+}
