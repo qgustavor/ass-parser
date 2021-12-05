@@ -4,6 +4,7 @@
   "description": "Parse SSA/ASS subtitle format",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "type": "module",
+  "main": "index.js",
   "license": "MIT",
   "scripts": {
     "test": "tape test/*.js"
