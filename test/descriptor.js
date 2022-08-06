@@ -1,11 +1,7 @@
-'use strict';
+import parseDescriptor from '../src/descriptor.js';
+import test from 'tape';
 
-var parseDescriptor = require('../src/descriptor');
-
-var test = require('tape');
-
-
-test('descriptor', function (t) {
+test('descriptor', t => {
   t.deepEqual(parseDescriptor('Timer: 100,0000'), {
     key: 'Timer',
     value: '100,0000'

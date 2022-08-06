@@ -1,28 +1,16 @@
-'use strict';
+import assParser from '../index.js';
+import test from 'tape';
+import fs from 'fs';
 
-var assParser = require('..');
+const sample = encoding => fs.readFileSync(new URL('sample.ass', import.meta.url), { encoding });
+const subtitleWithComments = JSON.parse(fs.readFileSync(new URL('sample.json', import.meta.url), { encoding: 'utf-8' }));
 
-var test = require('tape');
+const subtitleWithoutComments = subtitleWithComments.map(section => ({
+  section: section.section,
+  body: section.body.filter(({type}) => type != 'comment')
+}));
 
-var fs = require('fs');
-
-
-var sample = function (encoding) {
-  return fs.readFileSync(__dirname + '/sample.ass', { encoding: encoding });
-};
-
-var subtitleWithComments = require('./sample.json');
-var subtitleWithoutComments = subtitleWithComments.map(function (section) {
-  return {
-    section: section.section,
-    body: section.body.filter(function (descriptor) {
-      return descriptor.type != 'comment';
-    })
-  };
-});
-
-
-test('ass-parser', function (t) {
+test('ass-parser', t => {
   t.deepEqual(assParser(sample('utf8')),
               subtitleWithoutComments,
               'without comments');
