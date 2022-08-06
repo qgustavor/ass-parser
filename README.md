@@ -214,7 +214,7 @@ Subtitle is a list of sections, each of them has `section` and `body` properties
 ## Install
 
 ```shell
-npm install ass-parser
+npm install @qgustavor/ass-parser
 ```
 
 ## License
