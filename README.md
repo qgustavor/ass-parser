@@ -40,7 +40,7 @@ Subtitle is a list of sections, each of them has `section` and `body` properties
 
 ## Related
 
-- [ass-stringify](https://www.npmjs.com/packages/ass-stringify) - stringify SSA/ASS parse tree.
+- [@qgustavor/ass-stringify](https://www.npmjs.com/packages/@qgustavor/ass-stringify) - stringify SSA/ASS parse tree.
 
 ## Install
 
