@@ -52,4 +52,15 @@ const parseAss = (text, options) => {
   })
 }
 
+const detectStringifyOptions = (text) => {
+  // If text includes '\r\n' assume it uses it for new lines
+  const lineBreak = text.includes('\r\n') ? '\r\n' : '\n'
+
+  // Use a Regex to detect which joiner the subtitle uses
+  const formatJoiner = text.match(/^Format: \S+$/m) ? ',' : ', '
+
+  return { lineBreak, formatJoiner }
+}
+
 export default parseAss
+export { detectStringifyOptions }

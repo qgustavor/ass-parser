@@ -6,6 +6,7 @@ Parse SSA/ASS subtitle format. Forked from [eush77/ass-parser](https://github.co
 
 - All dependencies replaced with native modern JavaScript functions.
 - ES Modules instead of CommonJS.
+- Add `detectStringifyOptions` helper function.
 
 ## Demo
 
@@ -15,7 +16,7 @@ Parse SSA/ASS subtitle format. Forked from [eush77/ass-parser](https://github.co
 
 ### `assParser(text, [options])`
 
-Returns the parse tree.
+Default export. Returns the parse tree.
 
 Comments are ignored unless `options.comments` is set.
 
@@ -32,6 +33,10 @@ Subtitle is a list of sections, each of them has `section` and `body` properties
 - array if the descriptor key is `"Format"`;
 - object if there is a `"Format"` descriptor above in the section;
 - string otherwise.
+
+### `detectStringifyOptions(text)`
+
+Named export. Returns an options object to be passed to `stringify` in order to parse then stringify a subtitle with the minimal differences possible.
 
 ## References
 

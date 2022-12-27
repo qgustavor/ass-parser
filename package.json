@@ -10,7 +10,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "standard && tape test/*.js",
+    "test-fix": "standard --fix && tape test/*.js"
   },
   "files": [
     "index.js",
@@ -33,6 +34,7 @@
     "parser"
   ],
   "devDependencies": {
+    "standard": "^17.0.0",
     "tape": "^5.5.3"
   }
 }
