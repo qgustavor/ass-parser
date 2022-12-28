@@ -20,9 +20,10 @@ Default export. Returns the parse tree.
 
 Comments are ignored unless `options.comments` is set.
 
-| Option   | Type    | Required? | Default |
-| :------- | :------ | :-------: | :------ |
-| comments | boolean | No        | `false` |
+| Option          | Type    | Required? | Default |
+| :-------------- | :------ | :-------: | :------ |
+| comments        | boolean | No        | `false` |
+| parseTimestamps | boolean | No        | `false` |
 
 ## Format
 
@@ -33,6 +34,10 @@ Subtitle is a list of sections, each of them has `section` and `body` properties
 - array if the descriptor key is `"Format"`;
 - object if there is a `"Format"` descriptor above in the section;
 - string otherwise.
+
+When `parseTimestamps` is set to `true` timestamps on `Start` and `End` keys for `Dialogue` and `Comment` lines will be converted into numbers (in seconds).
+
+At the moment override tags are not parsed.
 
 ### `detectStringifyOptions(text)`
 

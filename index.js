@@ -29,8 +29,17 @@ const parseSection = (lines, options = {}) => {
       format = descriptor.value
     }
 
+    if ((descriptor.key === 'Dialogue' || descriptor.key === 'Comment') && options.parseTimestamps) {
+      descriptor.value.Start = parseTimestamp(descriptor.value.Start)
+      descriptor.value.End = parseTimestamp(descriptor.value.End)
+    }
+
     return [descriptor]
   }).filter(descriptor => descriptor)
+}
+
+const parseTimestamp = (timestamp) => {
+  return timestamp.split(':').reduce((sum, e) => sum * 60 + Number(e), 0)
 }
 
 const parseAss = (text, options) => {
@@ -53,6 +62,8 @@ const parseAss = (text, options) => {
 }
 
 const detectStringifyOptions = (text) => {
+  text = text.toString()
+
   // If text includes '\r\n' assume it uses it for new lines
   const lineBreak = text.includes('\r\n') ? '\r\n' : '\n'
 

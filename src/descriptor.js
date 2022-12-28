@@ -42,6 +42,7 @@ export default (line, format) => {
       value.push(lastPart)
     }
 
+    // Convert each part to string then trim
     value = value.map(Function.call.bind(''.trim))
 
     if (format) {
