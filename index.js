@@ -43,7 +43,7 @@ const parseTimestamp = (timestamp) => {
 }
 
 const parseAss = (text, options) => {
-  text = text.toString()
+  text = text.toString().replace(/\r/g, '')
   const sections = Array.from(text.matchAll(/^\s*\[(.*)\]\s*$/mg))
 
   return sections.map((section, index) => {
