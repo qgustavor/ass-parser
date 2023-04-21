@@ -10,11 +10,11 @@ import parseDescriptor from './src/descriptor.js'
  * @arg {Object} [options]
  * @return {Object}
  */
-const parseSection = (lines, options = {}) => {
+const parseSection = (lines, startLine, options = {}) => {
   // Format descriptor for subsequent section lines.
   let format = null
 
-  return lines.flatMap(line => {
+  return lines.flatMap((line, index) => {
     const descriptor = parseDescriptor(line, format)
     if (!descriptor) {
       // Empty line.
@@ -33,6 +33,7 @@ const parseSection = (lines, options = {}) => {
       descriptor.value.Start = parseTimestamp(descriptor.value.Start)
       descriptor.value.End = parseTimestamp(descriptor.value.End)
     }
+    descriptor.line = startLine + index
 
     return [descriptor]
   }).filter(descriptor => descriptor)
@@ -53,10 +54,12 @@ const parseAss = (text, options) => {
     const begin = section.index + section[0].length + 1
     const end = nextSection ? nextSection.index : text.length
     const lines = text.slice(begin, end).split('\n')
+    const currentLine = text.slice(0, begin).split('\n').length - 2
 
     return {
       section: sectionName,
-      body: parseSection(lines, options)
+      body: parseSection(lines, currentLine + 1, options),
+      line: currentLine
     }
   })
 }

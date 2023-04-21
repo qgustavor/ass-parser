@@ -27,7 +27,7 @@ Comments are ignored unless `options.comments` is set.
 
 ## Format
 
-Subtitle is a list of sections, each of them has `section` and `body` properties. The `body` is a list of key-value bindings (descriptors), with `key` and `value` properties (`type === 'comment'` and `value` for comments).
+Subtitle is a list of sections, each of them has `section`, `body` and `line` properties. The `body` is a list of key-value bindings (descriptors), with `key`, `value` and `line` properties (`type === 'comment'` and `value` for comments).
 
 `value` can be one of the following:
 
@@ -37,7 +37,9 @@ Subtitle is a list of sections, each of them has `section` and `body` properties
 
 When `parseTimestamps` is set to `true` timestamps on `Start` and `End` keys for `Dialogue` and `Comment` lines will be converted into numbers (in seconds).
 
-At the moment override tags are not parsed.
+At the moment override tags are not parsed. One alternative is parsing using [libjass](https://github.com/Arnavion/libjass/) like so: `libjass.parser.parse(descriptor.value.Text, 'dialogueParts')`.
+
+The `line` property in sections and descriptors refer to the 0-indexed line where the section or descriptor was defined in the text.
 
 ### `detectStringifyOptions(text)`
 
