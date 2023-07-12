@@ -2,8 +2,8 @@
   "name": "@qgustavor/ass-parser",
   "version": "0.5.1",
   "description": "Parse SSA/ASS subtitle format",
-  "author": "Eugene Sharygin <eush77@gmail.com>",
   "contributors": [
+    "Eugene Sharygin <eush77@gmail.com>",
     "qgustavor (https://github.com/qgustavor)"
   ],
   "type": "module",
@@ -17,13 +17,13 @@
     "index.js",
     "src/"
   ],
-  "homepage": "https://github.com/eush77/ass-parser",
+  "homepage": "https://github.com/qgustavor/ass-parser",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eush77/ass-parser"
+    "url": "https://github.com/qgustavor/ass-parser"
   },
   "bugs": {
-    "url": "https://github.com/eush77/ass-parser/issues"
+    "url": "https://github.com/qgustavor/ass-parser/issues"
   },
   "keywords": [
     "SSA",
